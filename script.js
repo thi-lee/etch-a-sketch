@@ -1,13 +1,16 @@
 let container = document.querySelector('.container');
 
-for (i = 1; i <= 16; i++) {
-    for (j = 1; j <= 16; j++) {
-        let grid = document.createElement('DIV');
-        grid.className = j;
-        grid.textContent = i * j;
-        container.appendChild(grid);
-        if (j % 2 == 0) {
-            grid.style.cssText = "background:lightyellow"
-        }
-    }
-}
+function makeRows(rows, cols) {
+    for (c = 1; c <= (rows * cols); c++) {
+      let cell = document.createElement("div");
+    //   cell.textContent = c;
+    //   if (c % 5 == 0) {
+    //       cell.style.cssText = "background: lightcyan;"
+    //   } else if (c % 3 == 0) {
+    //       cell.style.cssText = "background: lightblue;"
+    //   }
+      container.appendChild(cell).className = "grid-item";
+    };
+  };
+  
+  makeRows(16, 16);
