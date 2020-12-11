@@ -1,17 +1,38 @@
 let container = document.querySelector('.container');
+let instructions = document.querySelector('.instructions');
 
-let rows = 16;
+let rset = document.createElement('button');
+rset.textContent = 'Reset';
+rset.style.font = "bold 20px 'Cedarville Cursive', cursive";
+instructions.appendChild(rset).classList.add('rset');
+
+let rows = 88;
 
 function makegrid(rows) {
   container.style.gridTemplateColumns = (`repeat(${rows}, 1fr`);
   container.style.gridTemplateRows = (`repeat(${rows}, 1fr`);
   for (i = 1; i <= rows * rows; i++) {
     let cell = document.createElement('div');
-    container.appendChild(cell).classList.add('grid-item',i);
+    container.appendChild(cell).classList.add('grid-item');
   }
+  return container;
 }
 
 makegrid(rows);
+
+let cells = document.querySelectorAll('.grid-item');
+cells.forEach((cell) => {
+  cell.addEventListener('mouseover', function() {
+    cell.classList.add('hovering');
+  })
+})
+
+rset.addEventListener('click', function() {
+  cells.forEach((cell) => {
+    cell.classList.remove('hovering');
+  })
+  makegrid(rows);
+})
 
 
 
