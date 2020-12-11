@@ -23,7 +23,6 @@ rset.addEventListener('click', function() {
 });
 
 // functions
-
 function clearAll() {
   container.innerHTML = ' ';
 }
