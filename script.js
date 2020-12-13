@@ -69,17 +69,21 @@ function setHover(buttonClass) {
   cells.forEach((cell) => {
     cell.addEventListener('mouseover', function() {
       switch(buttonClass) {
+        case ('rset') :
+          cell.style.backgroundColor = 'white';
+          break;
         case('color'):
-          cell.classList.add('hovering-color');
+          cell.style.backgroundColor = chooseColor.value;
           break;
         case('opache'):
-          cell.classList.add('hovering-opache');
+          cell.style.backgroundColor = 'blue';
           break;  
         case('rainbow'):
-          cell.classList.add('hovering-rainbow');
+          let randomColor = Math.floor(Math.random()*16777215).toString(16);
+          cell.style.backgroundColor = "#" + randomColor;
           break;
         default: 
-          cell.classList.add('hovering');
+          cell.style.backgroundColor = 'black';
       }
     })
   })
