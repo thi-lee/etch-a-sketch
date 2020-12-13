@@ -1,17 +1,29 @@
 let container = document.querySelector('.container');
 let instructions = document.querySelector('.instructions');
-let rset = document.createElement('button');
 let slider = document.getElementById("myRange");
 let output = document.getElementById("demo");
+
+let rset = document.createElement('button'); rset.textContent = 'Reset';
+let color = document.createElement('button'); color.textContent = 'Color';
+let opache = document.createElement('button'); opache.textContent = 'Opache';
+let rainbow = document.createElement('button'); rainbow.textContent = 'Rainbow';
+
+instructions.appendChild(rset).classList.add('rset');
+instructions.appendChild(color).classList.add('color');
+instructions.appendChild(opache).classList.add('opache');
+instructions.appendChild(rainbow).classList.add('rainbow');
+
+let subColor = document.querySelector('.color');
+let chooseColor = document.createElement('input');
+chooseColor.type = 'color';
+chooseColor.value = '#5e7783';
+subColor.appendChild(chooseColor);
+
 let newSet = true;
 if (newSet) {
   makegrid(16);
   setHover();
 }
-
-rset.textContent = 'Reset';
-rset.style.font = "bold 20px 'Cedarville Cursive', cursive";
-instructions.appendChild(rset).classList.add('rset');
 
 output.textContent = slider.value;
 slider.addEventListener('input', function() {
@@ -19,8 +31,21 @@ slider.addEventListener('input', function() {
 })
 
 rset.addEventListener('click', function() {
-  rSetHover(slider.value)
-});
+  rSetHover(slider.value, rset.className);
+})
+
+color.addEventListener('click', function() {
+  rSetHover(slider.value, color.className);
+})
+
+opache.addEventListener('click', function() {
+  rSetHover(slider.value, opache.className);
+})
+
+rainbow.addEventListener('click', function() {
+  rSetHover(slider.value, rainbow.className);
+})
+
 
 // functions
 function clearAll() {
@@ -39,21 +64,38 @@ function makegrid(rows) {
   return newSet;
 }
 
-function setHover() {
+function setHover(buttonClass) {
   let cells = document.querySelectorAll('.grid-item');
   cells.forEach((cell) => {
     cell.addEventListener('mouseover', function() {
-      cell.classList.add('hovering');
+      switch(buttonClass) {
+        case('color'):
+          cell.classList.add('hovering-color');
+          break;
+        case('opache'):
+          cell.classList.add('hovering-opache');
+          break;  
+        case('rainbow'):
+          cell.classList.add('hovering-rainbow');
+          break;
+        default: 
+          cell.classList.add('hovering');
+      }
     })
   })
 }
 
-function rSetHover(rows) {
+function rSetHover(rows, buttonClass) {
   let cells = document.querySelectorAll('.grid-item');
-  cells.forEach((cell) => {
-    cell.classList.remove('hovering');
-  })
-  newSet = makegrid(rows);
-  makegrid(rows);
-  setHover();
+  if (buttonClass == 'rset') {
+    cells.forEach((cell) => {
+      cell.classList.remove('hovering');
+    })
+    newSet = makegrid(rows);
+    makegrid(rows);
+    setHover(buttonClass);
+  } else {
+    setHover(buttonClass);
+  }
+
 }
