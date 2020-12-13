@@ -3,14 +3,19 @@ let instructions = document.querySelector('.instructions');
 let slider = document.getElementById("myRange");
 let output = document.getElementById("demo");
 
-let rset = document.createElement('button'); rset.textContent = 'Reset';
-let color = document.createElement('button'); color.textContent = 'Color';
-let opache = document.createElement('button'); opache.textContent = 'Opache';
-let rainbow = document.createElement('button'); rainbow.textContent = 'Rainbow';
+let rset = document.createElement('button'); 
+let color = document.createElement('button'); 
+let opaque = document.createElement('button'); 
+let rainbow = document.createElement('button'); 
+
+rset.textContent = 'Reset';
+color.textContent = 'Color';
+opaque.textContent = 'Opaque';
+rainbow.textContent = 'Rainbow';
 
 instructions.appendChild(rset).classList.add('rset');
 instructions.appendChild(color).classList.add('color');
-instructions.appendChild(opache).classList.add('opache');
+instructions.appendChild(opaque).classList.add('opaque');
 instructions.appendChild(rainbow).classList.add('rainbow');
 
 let subColor = document.querySelector('.color');
@@ -38,8 +43,8 @@ color.addEventListener('click', function() {
   rSetHover(slider.value, color.className);
 })
 
-opache.addEventListener('click', function() {
-  rSetHover(slider.value, opache.className);
+opaque.addEventListener('click', function() {
+  rSetHover(slider.value, opaque.className);
 })
 
 rainbow.addEventListener('click', function() {
@@ -75,8 +80,21 @@ function setHover(buttonClass) {
         case('color'):
           cell.style.backgroundColor = chooseColor.value;
           break;
-        case('opache'):
-          cell.style.backgroundColor = 'blue';
+        case('opaque'): // need debugging 
+          if (this.style.backgroundColor.match(/rgba/)) {
+            console.log('1');
+            let currentOpacity = Number(this.style.backgroundColor.slice(-4, -1));
+            if (currentOpacity <= 0.9) {
+                this.style.backgroundColor = `rgba(0, 0, 0, ${currentOpacity + 0.1})`;
+                this.classList.add('opaque');
+            }
+          } else if (this.classList == 'opaque' && this.style.backgroundColor == 'rgb(0, 0, 0)') {
+            console.log('2');
+            return;
+          } else {
+            console.log('3');
+            this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';  
+          }
           break;  
         case('rainbow'):
           let randomColor = Math.floor(Math.random()*16777215).toString(16);
