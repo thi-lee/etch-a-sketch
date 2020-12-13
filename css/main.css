@@ -80,6 +80,16 @@ button {
     margin: 1em;
 }
 
+.color {
+  padding: 0;
+  margin: 10px;
+}
+
+.chooseColor {
+  height: 25px;
+  width: 25px;
+}
+
 /* slider */
 .slidecontainer {
     width: 100%; /* Width of the outside container */

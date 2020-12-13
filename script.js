@@ -4,25 +4,28 @@ let slider = document.getElementById("myRange");
 let output = document.getElementById("demo");
 
 let rset = document.createElement('button'); 
-let color = document.createElement('button'); 
+let colorContainer = document.createElement('div');
 let opaque = document.createElement('button'); 
 let rainbow = document.createElement('button'); 
 
+instructions.appendChild(rset).classList.add('rset');
+instructions.appendChild(opaque).classList.add('opaque');
+instructions.appendChild(rainbow).classList.add('rainbow');
+instructions.appendChild(colorContainer).classList.add('colorContainer');
+
 rset.textContent = 'Reset';
-color.textContent = 'Color';
 opaque.textContent = 'Opaque';
 rainbow.textContent = 'Rainbow';
 
-instructions.appendChild(rset).classList.add('rset');
-instructions.appendChild(color).classList.add('color');
-instructions.appendChild(opaque).classList.add('opaque');
-instructions.appendChild(rainbow).classList.add('rainbow');
-
-let subColor = document.querySelector('.color');
+let subColor = document.querySelector('.colorContainer');
+let color = document.createElement('button'); 
+color.textContent = 'Color';
 let chooseColor = document.createElement('input');
 chooseColor.type = 'color';
 chooseColor.value = '#5e7783';
-subColor.appendChild(chooseColor);
+subColor.appendChild(color).classList.add('color');
+subColor.appendChild(chooseColor).classList.add('chooseColor');
+
 
 let newSet = true;
 if (newSet) {
